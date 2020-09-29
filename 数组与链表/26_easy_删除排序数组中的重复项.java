@@ -7,10 +7,9 @@ https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/
 解题思路
 从数组的第二个元素开始，不用考虑边界；双指针遍历，第一个指针遍历数组，第二个指针停留在数组头部；如遇到相同的数字，则指针一前移；否则，指针二前移，并记录下指向的数字。
 */
-'''Java
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int res = 0;    // 给定长度
+        int res = 0;  
         for(int i = 1; i < nums.length; i++) {
             if(nums[res] != nums[i]){
                 nums[++res] = nums[i];
@@ -19,4 +18,3 @@ class Solution {
         return res + 1;
     }
 }
-'''
