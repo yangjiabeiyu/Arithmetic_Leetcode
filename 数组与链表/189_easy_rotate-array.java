@@ -12,3 +12,20 @@ https://leetcode-cn.com/problems/rotate-array/
 向右旋转 3 步: [5,6,7,1,2,3,4]
 要求使用空间复杂度为 O(1) 的 原地 算法。
 */
+
+/*
+解法一：取出数组最后一个元素e，其余元素后移一位，再将e放到首元素位置，重复k次；复杂度O(k*n)
+*/
+class Solution {
+    public void rotate(int[] nums, int k) {
+        if(nums.length <= 1)
+            return;
+        int flag, i, j; 
+        for(j = 0; j < k; j++) {
+            flag = nums[nums.length - 1];
+            for(i = nums.length - 1; i > 0; i--)
+                nums[i] = nums[i-1];
+            nums[0] = flag;
+        }
+    }
+}
