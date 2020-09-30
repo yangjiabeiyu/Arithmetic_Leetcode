@@ -22,7 +22,7 @@ https://leetcode-cn.com/problems/3sum/
 
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);  //对数组排序
+        Arrays.sort(nums);  // 对数组排序
         List<List<Integer>> list = new ArrayList<>();
         for(int i = 0; i < nums.length; i++) {  // 一重循环
             if(i == 0 || nums[i] != nums[i-1]) {  // 如果前后数值不同则开启二重循环
