@@ -1,3 +1,6 @@
 # Arithmetic_Leetcode
 Record the process of learning algorithm and the problem solution of Leetcode
-This is my first use of github！
+## 算法题来源
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
