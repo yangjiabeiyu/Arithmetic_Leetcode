@@ -36,10 +36,48 @@ class Solution {
 
 /*
 改进1：可以迭代来代替数组，降低空间复杂度
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：36.4 MB, 在所有 Java 提交中击败了30.87% 的用户
 */
-
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 0)
+            return 0;
+        else if(nums.length == 1)
+            return nums[0];
+        return Math.max(rob(nums, 0), rob(nums, 1));
+        
+    }
+    public int rob(int[] nums, int start) {
+        int resOld = 0, res = nums[start], resNew;
+        for(int i = 1; i < nums.length - 1; i++) {
+            resNew = Math.max(nums[start + i] + resOld, res);
+            resOld = res;
+            res = resNew;
+        }
+        return res;
+    }
+}
 
 
 /*
-改进1：如果初值设为0和0，那么可以不用讨论数组长度为0的情况
+改进2：如果初值设为0和0，那么可以不用讨论数组长度为0的情况
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：36.5 MB, 在所有 Java 提交中击败了16.45% 的用户
 */
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1)
+            return nums[0];
+        return Math.max(rob(nums, 0), rob(nums, 1));    
+    }
+    public int rob(int[] nums, int start) {
+        int resOld = 0, res = 0, resNew;
+        for(int i = 1; i < nums.length; i++) {
+            resNew = Math.max(nums[start + i - 1] + resOld, res);
+            resOld = res;
+            res = resNew;
+        }
+        return res;
+    }
+}
