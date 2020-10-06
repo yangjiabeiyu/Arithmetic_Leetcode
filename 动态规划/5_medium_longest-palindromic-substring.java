@@ -36,3 +36,30 @@ class Solution {
         return ans;
     }
 }
+
+/*
+解法二：遍历字符串，分别以每个字符为中心向两周扩展，找到最长的回文字串
+*/
+class Solution {
+    public String longestPalindrome(String s) {
+        int len = s.length();
+        if(len <= 1)
+            return s;
+        String ans = "";
+        for(int k = 0; k < len; k++) {
+            int len1 = expand(s, k, k);
+            int len2 = expand(s, k, k + 1);
+            int maxLen = Math.max(len1, len2);
+            if(maxLen > ans.length())
+                ans = s.substring(k - (maxLen - 1) / 2, k + maxLen / 2 + 1);
+        }
+        return ans;
+    }
+    public static int expand(String s, int start, int end) {
+        while(start >= 0 && end < s.length() && s.charAt(start) == s.charAt(end)) {
+            start--;
+            end++;
+        }
+        return end - start - 1;
+    }
+}
