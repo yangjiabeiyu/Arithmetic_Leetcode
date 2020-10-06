@@ -32,7 +32,7 @@ class Solution {
         // 初始化
         for(int i = 0; i < m; i++) {
             if(obstacleGrid[i][0] == 1) {
-                for(int j = i; j < m; j++)
+                for(int j = i; j < m; j++)  //该循环可以省略，直接break，因为本身默认值就是0
                     res[j][0] = 0;
                 break;
             }
@@ -41,7 +41,7 @@ class Solution {
         }
         for(int i = 0; i < n; i++) {
             if(obstacleGrid[0][i] == 1) {
-                for(int j = i; j < n; j++)
+                for(int j = i; j < n; j++)  //该循环可以省略，直接break，因为本身默认值就是0
                     res[0][j] = 0;
                 break;
             }
@@ -87,5 +87,51 @@ class Solution {
             }
         }
         return res[n-1];
+    }
+}
+
+/*
+优化二：多开辟一个空间，无需判断边界
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：36.8 MB, 在所有 Java 提交中击败了90.09% 的用户
+*/
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[] res = new int[n + 1];
+        // 初始化
+        res[1] = 1;  // 默认没有障碍物，有初始值1；一旦遇到障碍物 ，那么res[1]就变为0
+        for(int i = 1; i <= m; i++) {   
+            for(int j = 1; j <= n; j++) {
+                if(obstacleGrid[i - 1][j - 1] == 1)
+                    res[j] = 0;
+                else
+                    res[j] += res[j-1];
+            }
+        }
+        return res[n];
+    }
+}
+
+/*
+不多一个空间开辟，需要判断边界
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：37.1 MB, 在所有 Java 提交中击败了72.16% 的用户
+*/
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[] res = new int[n];
+        // 初始化
+        res[0] = 1;
+        for(int i = 0; i < m; i++) {   
+            for(int j = 0; j < n; j++) {
+                if(obstacleGrid[i][j] == 1)
+                    res[j] = 0;
+                else if(j > 0)
+                    res[j] += res[j-1];
+            }
+        }
+        return res[n - 1];
     }
 }
