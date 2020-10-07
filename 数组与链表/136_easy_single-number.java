@@ -25,3 +25,17 @@ class Solution {
     }
 }
 
+/*
+解法二：使用异或，n异或n = 0，n异或0 = n，且异或满足交换律
+执行用时：1 ms, 在所有 Java 提交中击败了99.77% 的用户
+内存消耗：38.9 MB, 在所有 Java 提交中击败了98.41% 的用户
+*/
+class Solution {
+    public int singleNumber(int[] nums) {
+        int single = 0;
+        for (int num : nums) {
+            single ^= num;
+        }
+        return single;
+    }
+}
