@@ -25,3 +25,37 @@ class Solution {
         return res;
     }
 }
+
+/*
+空间优化
+执行用时：1 ms, 在所有 Java 提交中击败了95.93% 的用户
+内存消耗：39.1 MB, 在所有 Java 提交中击败了13.97% 的用户
+*/
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length, res = nums[0], cur = nums[0];
+        for(int i = 1; i < n; i++) {
+            cur = Math.max(cur + nums[i], nums[i]);
+            res = Math.max(cur, res);
+        }
+        return res;
+    }
+}
+
+/*
+解法二：贪婪算法，从头开始找，一旦加和小于0，那么就重新找
+执行用时：1 ms, 在所有 Java 提交中击败了95.93% 的用户
+内存消耗：38.8 MB, 在所有 Java 提交中击败了61.04% 的用户
+*/
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length, res = Integer.MIN_VALUE, sum = 0;
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+            res = Math.max(res, sum);
+            sum = Math.max(sum, 0);
+        }
+        return res;
+    }
+}
