@@ -43,3 +43,23 @@ class Solution {
         return root == null ? 0 : 1 + Math.max(depthOfTree(root.left), depthOfTree(root.right));
     }
 }
+
+/*
+解法二：定义一个类内变量，maxNum，在计算深度的时候，刷新最大值
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：38.7 MB, 在所有 Java 提交中击败了76.13% 的用户
+*/
+class Solution {
+    int maxNum = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        depthOfTree(root);
+        return maxNum;
+    }
+    public int depthOfTree(TreeNode root) {
+        if(root == null)
+            return 0;
+        int num1 = depthOfTree(root.left), num2 = depthOfTree(root.right);
+        maxNum = Math.max(num1 + num2, maxNum);  // 左右子树的加和
+        return Math.max(num1, num2) + 1;  // 返回深度
+    }
+}
