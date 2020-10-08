@@ -35,7 +35,7 @@ class Solution {
     public int hammingDistance(int x, int y) {
         int a = x ^ y, cnt = 0;
         while(a != 0) {
-            if((a & 1) == 1)
+            if((a & 1) == 1)   // 这里也可以对2取余。注意，位运算符的优先级低于==，所以要加括号
                 cnt++;
             a = a >> 1;
         }
