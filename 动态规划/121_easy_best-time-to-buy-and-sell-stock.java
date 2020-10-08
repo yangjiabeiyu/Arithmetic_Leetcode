@@ -51,6 +51,8 @@ class Solution {
 
 /*
 解法二：双指针，一个记录最小值，一个刷新最大差值
+执行用时：2 ms, 在所有 Java 提交中击败了63.60% 的用户
+内存消耗：39 MB, 在所有 Java 提交中击败了20.05% 的用户
 */
 class Solution {
     public int maxProfit(int[] prices) {
