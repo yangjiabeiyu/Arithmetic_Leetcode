@@ -41,3 +41,7 @@ public class Solution {
         return null;
     }
 }
+
+
+/*
+解法二：类比之间找相交链表的
