@@ -44,4 +44,55 @@ public class Solution {
 
 
 /*
-解法二：类比之间找相交链表的
+解法二：类比之间找相交链表的第一个相交节点，可以将环拆开：slow和fast相遇则说明有环，然后以slow为尾部，fast.next和head找第一个相交节点
+执行用时：1 ms, 在所有 Java 提交中击败了38.00% 的用户
+内存消耗：38.8 MB, 在所有 Java 提交中击败了70.99% 的用户
+*/
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null || head.next == null)
+            return null;
+        ListNode slow = head.next, fast = head.next.next;
+        while(slow != fast) {
+            if(fast == null || fast.next == null)  // 一旦fast到头，则说明无环
+                return null;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        fast = fast.next;  //走到这里说明slow和fast相遇，把slow定在原地
+        ListNode p = head;
+        while(fast != p) {
+            fast = fast == slow ? head : fast.next;  // fast继续走，走到slow之后从head走
+            p = p == slow ? slow.next : p.next;  // head往前走，走到slow之后从slow.next走，两者相遇的点即是入口节点
+        }
+        return p;
+    }
+}
+
+
+/*
+解法三：我们记公共部分长度为a，当slow与fast相遇时，据入口b步，再走c步又会到入口；不妨假设fast已经走了n圈，那么有2*(a+b) = a + n(b+c) + b，即a = (n-1)(b+c) + c
+这里慢指针一旦进入环内，必然在第一圈就被追上，原因在于就算快指针在慢指针前面一步，也就是要套一圈，但因为速度是2倍，slow跑不完一圈，fast就能追上。
+在快慢指针遇到后，一个指针从fast走，一个从head走，那么第一次遇见的点就是入口节点，即使fast还要绕(n-1)圈。
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：38.7 MB, 在所有 Java 提交中击败了86.27% 的用户
+*/
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        if(head == null || head.next == null)
+            return null;
+        ListNode slow = head.next, fast = head.next.next;
+        while(slow != fast) {
+            if(fast == null || fast.next == null)
+                return null;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode p = head;
+        while(fast != p) {    // 两个指针向前走即可，一定遇到，且是入口节点
+            fast = fast.next;
+            p = p.next;
+        }
+        return p;
+    }
+}
