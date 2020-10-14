@@ -59,3 +59,45 @@ class Solution {
         }
     }
 }
+
+
+/*
+解法二：解法一有一个问题在于，每次merge时复杂度为O(m+n)，我们不妨假设链表平均长度为len，共n个，则整体复杂度为O(2n+3n+…+n*n)),求和可知复杂度为O(n^3)。
+如果二分，例如4个链表，先两两结合，再两两结合，那么就会降低复杂度。所进行的比较次数相同，但长度为，2*n*n/2 + 4*n*n/4 + … + n*n*n/n,共log(n)个式子，所以复杂度为O(n^2log(n))。
+执行用时：1 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：40.4 MB, 在所有 Java 提交中击败了87.29% 的用户
+*/
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        return fun(0, lists.length - 1, lists);
+    }
+    public ListNode fun(int left, int right, ListNode[] lists) {
+        if(left == right)
+            return lists[left];
+        if(left > right)
+            return null;
+        int mid = (left + right) >> 1;
+        return mergeTwoLists(fun(left, mid, lists), fun(mid + 1, right, lists));
+    }
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode resNode = new ListNode();
+        ListNode head = resNode;
+        while(true) {
+            if(l1 == null || l2 == null) {
+                resNode.next = l1 == null ? l2 : l1;
+                return head.next;
+            }
+            else {
+                if(l1.val <= l2.val) {
+                    resNode.next = l1;
+                    l1 = l1.next;
+                }
+                else {
+                    resNode.next = l2;
+                    l2 = l2.next;        
+                }
+                resNode = resNode.next;
+            }
+        }
+    }
+}
