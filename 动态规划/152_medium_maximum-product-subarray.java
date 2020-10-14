@@ -9,6 +9,8 @@ https://leetcode-cn.com/problems/maximum-product-subarray/
 
 /*
 解法：动态规划
+执行用时：4 ms, 在所有 Java 提交中击败了15.43% 的用户
+内存消耗：38.1 MB, 在所有 Java 提交中击败了100.00% 的用户
 */
 class Solution {
     public int maxProduct(int[] nums) {
