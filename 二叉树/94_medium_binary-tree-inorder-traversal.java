@@ -51,3 +51,27 @@ class Solution {
         fun(node.right, list);
     }
 }
+
+/*
+解法二：迭代，参照递归的过程来写迭代代码
+执行用时：1 ms, 在所有 Java 提交中击败了45.99% 的用户
+内存消耗：36.4 MB, 在所有 Java 提交中击败了99.74% 的用户
+*/
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if(root == null)
+            return list;
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.isEmpty()) {
+            while(root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
+    }
+}
