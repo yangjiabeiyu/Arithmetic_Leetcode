@@ -1,0 +1,63 @@
+/*
+剑指 Offer 49. 丑数
+我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。
+
+示例:
+
+输入: n = 10
+输出: 12
+解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。
+
+说明:  
+    1 是丑数。
+    n 不超过1690。
+*/
+
+/*
+解法一：下一个丑数必然是之前丑数*2或*3或*5，因此可以用三个指针来记录，分别通过乘积来找到第一个大于当前丑数的数字，里面最小的数字即是下一个丑数。
+执行用时：3 ms, 在所有 Java 提交中击败了81.96% 的用户
+内存消耗：37.5 MB, 在所有 Java 提交中击败了16.96% 的用户
+*/
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] dp = new int[n];
+        dp[0] = 1;
+        int i = 0, j = 0, k = 0, cnt = 0;
+        while(cnt < n - 1) {
+            while(2 * dp[i] <= dp[cnt])
+                i++;
+            while(3 * dp[j] <= dp[cnt])
+                j++;
+            while(5 * dp[k] <= dp[cnt])
+                k++;
+            dp[++cnt] = Math.min(2 * dp[i], Math.min(3 * dp[j], 5 * dp[k]));
+        }
+        return dp[cnt];
+    }
+}
+
+/*
+解法二：其实思路是类似的，不过可以不用循环，如果是*2找到了新丑数，那么就对应指针向后移动一位；*3和*5相同。不断寻找即可。
+执行用时：3 ms, 在所有 Java 提交中击败了81.96% 的用户
+内存消耗：37.6 MB, 在所有 Java 提交中击败了16.01% 的用户
+*/
+class Solution {
+    public int nthUglyNumber(int n) {
+        int[] dp = new int[n];
+        dp[0] = 1;
+        int i = 0, j = 0, k = 0;
+        for(int cnt = 1; cnt < n; cnt++) {
+            int a = 2 * dp[i], b = 3 * dp[j], c = 5 * dp[k];
+            dp[cnt] = Math.min(a, Math.min(b, c));
+            if(dp[cnt] == a)                // 注意这里要分开判断，因为可能dp[cnt] == a == b，这样的话，这次选了a，下次会再次选中b。所以分别判断，来避免重复。
+                i++;
+            if(dp[cnt] == b)
+                j++;
+            if(dp[cnt] == c)
+                k++;
+        }
+        return dp[n - 1];
+    }
+}
+
+
