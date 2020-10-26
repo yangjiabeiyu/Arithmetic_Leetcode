@@ -49,3 +49,47 @@ class Solution {
     }
 }
 
+/*
+解法二：使用二维数组记录元素及其下标，然后对元素进行排序，之后统计次数即可。
+执行用时：6 ms, 在所有 Java 提交中击败了66.41% 的用户
+内存消耗：38.2 MB, 在所有 Java 提交中击败了98.97% 的用户
+*/
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int n = nums.length;
+        int[][] arr = new int[n][2];
+        int[] res = new int[n];
+        for(int i = 0; i < n; i++) {
+            arr[i][0] = nums[i];
+            arr[i][1] = i;
+        }
+        Arrays.sort(arr, (v1, v2) -> v1[0] - v2[0]);
+        int index = -1;
+        for(int i = 0; i < n; i++) {
+            if(index == -1 || arr[i][0] != arr[i - 1][0])       // 找到比当前元素小的元素个数
+                index = i;
+            res[arr[i][1]] = index;
+        }
+        return res;
+    }
+}
+
+/*
+解法三：注意到元素的取值范围为0~100，因此可以创建长度为101的数组，统计各元素出现的次数，然后依次叠加得到小于当前元素的元素个数。
+执行用时：1 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：38.5 MB, 在所有 Java 提交中击败了94.57% 的用户
+*/
+class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int n = nums.length;
+        int[] arr = new int[101], res = new int[n];
+        for(int i = 0; i < n; i++)
+            arr[nums[i]]++;
+        for(int i = 1; i < 101; i++)
+            arr[i] += arr[i - 1];
+        for(int i = 0; i < n; i++)
+            res[i] = nums[i] == 0 ? 0 : arr[nums[i] - 1];
+        return res;
+    }
+}
+
