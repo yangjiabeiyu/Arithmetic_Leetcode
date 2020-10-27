@@ -75,3 +75,25 @@ class Solution {
     }
 }
 
+/*
+解法三：构造比较器的另一种方式
+执行用时：6 ms, 在所有 Java 提交中击败了89.40% 的用户
+内存消耗：37.7 MB, 在所有 Java 提交中击败了99.15% 的用户
+*/
+class Solution {
+    public String minNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++)
+            strs[i] = String.valueOf(nums[i]);
+        Arrays.sort(strs, new Comparator<String>(){
+            public int compare(String p1, String p2) {
+                return (p1 + p2).compareTo(p2 + p1);
+            }
+        });
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < nums.length; i++)
+            sb.append(strs[i]);
+        return sb.toString();
+    }
+}
+
