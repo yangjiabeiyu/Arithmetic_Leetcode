@@ -1,0 +1,40 @@
+/*
+剑指 Offer 20. 表示数值的字符串
+https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/
+请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串"+100"、"5e2"、"-123"、"3.1416"、"-1E-16"、"0123"都表示数值，但"12e"、"1a3.14"、"1.2.3"、"+-5"及"12e+5.4"都不是。
+*/
+
+
+/*
+解法：逐个判断
+执行用时：2 ms, 在所有 Java 提交中击败了99.42% 的用户
+内存消耗：38.1 MB, 在所有 Java 提交中击败了98.80% 的用户
+*/
+class Solution {
+    public boolean isNumber(String s) {
+        char[] c = s.trim().toCharArray();   // 去除多余的空格
+        if(c.length == 0)
+            return false;
+        boolean isNum = false, isDot = false, isE = false;   // 分别表示是否遇到了数字、小数点、e/E
+        for(int i = 0; i < c.length; i++) {
+            if(c[i] >= '0' && c[i] <= '9')     // 如果是数字，那么就置为true
+                isNum = true;
+            else if(c[i] == 'E' || c[i] == 'e') {    // 如果是e/E，那么需要前面没有e/E，并且已经出现了数字；然后把数位置为false，因为后面也需要有数字
+                if(!isNum || isE) return false;
+                isE = true;
+                isNum = false;
+            }
+            else if(c[i] == '.') {        // 如果是小数点，那么需要前面没有e/E，也不能有其他的小数点
+                if(isDot || isE) return false;
+                isDot = true;
+            }
+            else if(c[i] == '+' || c[i] == '-') {       // 如果是符号位，那么需要是首位，或者紧挨着前一个是e/E
+                if(i != 0 && c[i - 1] != 'E' && c[i - 1] != 'e') return false;
+            }
+            else return false;
+        }
+        return isNum;
+    }
+}
+
+
