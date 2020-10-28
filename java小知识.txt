@@ -1,0 +1,9 @@
+1、hashmap转为entry数组
+eg：可使用getKey与getValue取到值，当然也可以使用keySet来遍历，但如果只是需要value，就更加方便。
+for(Map.Entry<Integer, Integer> x : map.entrySet())
+    if(!set.add(x.getValue()))
+        return false;
+2、hashmap取值
+map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+
+
