@@ -23,3 +23,18 @@ res.toString();                      // builder转字符串
 char[] c = s.toCharArray();    // 字符串转char数组
 String.valueOf(c);             // char数组转字符串
 
+/*
+5、字符串拼接
+*/
+List<String> res = new ArrayList<>();
+List<String> path = new ArrayList<>();
+res.add(String.join(" ", path));  // 可以拼接字符串数组或队列
+
+/*
+6、ArrayList方法
+*/
+List<String> res = new ArrayList<>();
+res.add(); // 末尾添加
+res.remove(); // 删除末尾
+
+
