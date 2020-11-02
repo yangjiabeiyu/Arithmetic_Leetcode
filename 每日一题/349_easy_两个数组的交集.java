@@ -15,10 +15,12 @@ https://leetcode-cn.com/problems/intersection-of-two-arrays/
     输出结果中的每个元素一定是唯一的。
     我们可以不考虑输出结果的顺序。
 */
+
+/*
 解法一：使用map<Integer, Boolean>存储数组一，然后遍历数组二，遇到后就取false
 执行用时：3 ms, 在所有 Java 提交中击败了95.82% 的用户
 内存消耗：38.6 MB, 在所有 Java 提交中击败了88.65% 的用户
-/*
+*/
 class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         Map<Integer, Boolean> map = new HashMap<>();
