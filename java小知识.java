@@ -57,4 +57,11 @@ set.remove(i);   // 删除i
 */
 Arrays.copyOfRange(arr, 0, index);  // 得到arr数组的前index个数字
 
-
+/*
+9、优先队列
+*/
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(k, (a, b) -> b - a);  // 最大堆
+PriorityQueue<Integer> minHeap = new PriorityQueue<>(k, (a, b) -> a - b);  // 最小堆
+maxHeap.add(num);    // 添加元素
+maxHeap.peek();      // 查看堆顶元素
+maxHeap.poll();      // 弹出堆顶元素
