@@ -46,3 +46,9 @@ set.contains(i);  // set是否包含i
 set.add(i);           // 添加i
 set.remove(i);   // 删除i
 
+/*
+8、数组剪切
+*/
+Arrays.copyOfRange(arr, 0, index);  // 得到arr数组的前index个数字
+
+
