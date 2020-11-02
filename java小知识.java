@@ -17,6 +17,7 @@ map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
 res.deleteCharAt(res.length() - 1);  // 删除指定位置元素
 res.toString();                      // builder转字符串
 res.length(); // 长度
+res.reverse();  // 翻转
 
 /*
 4、类型转换
@@ -25,6 +26,8 @@ char[] c = s.toCharArray();    // 字符串转char数组
 String.valueOf(c);             // char数组转字符串
 List <Integer> res = new ArrayList<>();
 res.stream().mapToInt(Integer::intValue).toArray();  // Integer列表转int数组
+char ch = (char) (num + '0');  // 整数转字符
+int i = ch - '0'; // 字符转整数
 
 /*
 5、字符串拼接
