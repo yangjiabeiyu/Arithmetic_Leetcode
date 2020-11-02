@@ -16,6 +16,7 @@ map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
 */
 res.deleteCharAt(res.length() - 1);  // 删除指定位置元素
 res.toString();                      // builder转字符串
+res.length(); // 长度
 
 /*
 4、类型转换
@@ -38,6 +39,8 @@ res.add(String.join(" ", path));  // 可以拼接字符串数组或队列
 List<String> res = new ArrayList<>();
 res.add(); // 末尾添加
 res.remove(); // 删除末尾
+res.set(index, value);  // 修改值
+res.size();  // 列表的长度
 
 /*
 7、hashset方法
