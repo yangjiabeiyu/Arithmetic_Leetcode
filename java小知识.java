@@ -22,6 +22,8 @@ res.toString();                      // builder转字符串
 */
 char[] c = s.toCharArray();    // 字符串转char数组
 String.valueOf(c);             // char数组转字符串
+List <Integer> res = new ArrayList<>();
+res.stream().mapToInt(Integer::intValue).toArray();  // Integer列表转int数组
 
 /*
 5、字符串拼接
@@ -37,4 +39,10 @@ List<String> res = new ArrayList<>();
 res.add(); // 末尾添加
 res.remove(); // 删除末尾
 
+/*
+7、hashset方法
+*/
+set.contains(i);  // set是否包含i
+set.add(i);           // 添加i
+set.remove(i);   // 删除i
 
