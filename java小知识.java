@@ -7,9 +7,11 @@ for(Map.Entry<Integer, Integer> x : map.entrySet())
         return false;
 
 /*
-2、hashmap取值
+2、hashmap方法
 */
 map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+Map<String, List<String>> map = new HashMap<>();
+List<List<String>> res = new ArrayList<>(map.values());  // 得到map中的value，并形成新的列表
 
 /*
 3、StringBuilder方法
@@ -28,6 +30,8 @@ List <Integer> res = new ArrayList<>();
 res.stream().mapToInt(Integer::intValue).toArray();  // Integer列表转int数组
 char ch = (char) (num + '0');  // 整数转字符
 int i = ch - '0'; // 字符转整数
+char[] ch = str.toCharArray();       // 字符串转数组
+String s = String.valueOf(ch);       // char数组转字符串
 
 /*
 5、字符串拼接
