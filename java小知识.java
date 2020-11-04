@@ -65,3 +65,11 @@ PriorityQueue<Integer> minHeap = new PriorityQueue<>(k, (a, b) -> a - b);  // �
 maxHeap.add(num);    // 添加元素
 maxHeap.peek();      // 查看堆顶元素
 maxHeap.poll();      // 弹出堆顶元素
+
+/*
+10、Arrays类
+*/
+Arrays.sort();   // 排序
+Arrays.equals(arr1, arr2);  // 比较是否相等，返回boolean
+
+
