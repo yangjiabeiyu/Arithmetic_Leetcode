@@ -53,8 +53,34 @@ class Solution {
 
 /*
 解法二：把新的节点放在后面，这样找random，直接next就是。
-
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：38.1 MB, 在所有 Java 提交中击败了90.81% 的用户
 */
-
+class Solution {
+    public Node copyRandomList(Node head) {
+        if(head == null) return null;
+        Node p = head;
+        while(p != null) {     // 把复制的节点放到后面
+            Node temp = p.next;
+            p.next = new Node(p.val);
+            p.next.next = temp;
+            p = temp;
+        }
+        p = head;
+        while(p != null) {
+            p.next.random = p.random == null ? null : p.random.next;    // random的复制
+            p = p.next.next;
+        }
+        p = head;
+        Node flag = new Node(0), q = flag;
+        while(p != null) {     // 拆分两链表
+            q.next = p.next;
+            q = q.next;
+            p.next = q.next;
+            p = p.next;
+        }
+        return flag.next;
+    }
+}
 
 
