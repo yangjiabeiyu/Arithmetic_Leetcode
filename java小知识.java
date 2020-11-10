@@ -32,6 +32,7 @@ char ch = (char) (num + '0');  // 整数转字符
 int i = ch - '0'; // 字符转整数
 char[] ch = str.toCharArray();       // 字符串转数组
 String s = String.valueOf(ch);       // char数组转字符串
+int num = Integer.parseInt(strs);  // 字符串转数字
 
 /*
 5、字符串拼接
@@ -75,5 +76,11 @@ maxHeap.poll();      // 弹出堆顶元素
 */
 Arrays.sort();   // 排序
 Arrays.equals(arr1, arr2);  // 比较是否相等，返回boolean
+
+/*
+11、切片
+*/
+String[] strs = data.substring(1, data.length() - 1).split(","); // 将字符串切片，存储在字符串数组中，注意分隔符需要是字符串形式
+
 
 
