@@ -37,3 +37,47 @@ class Solution {
     }
 }
 
+/*
+自己写快排
+执行用时：6 ms, 在所有 Java 提交中击败了93.22% 的用户
+内存消耗：38 MB, 在所有 Java 提交中击败了91.42% 的用户
+*/
+class Solution {
+    public String largestNumber(int[] nums) {
+        String[] strs = new String[nums.length];
+        for(int i = 0; i < nums.length; i++)
+            strs[i] = String.valueOf(nums[i]);
+        qSort(strs, 0, strs.length - 1);
+        if(strs[0].charAt(0) == '0')
+            return "0";
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < nums.length; i++)
+            res.append(strs[i]);
+        
+        return res.toString();
+    }
+    public void qSort(String[] strs, int left, int right) {
+        if(left >= right)
+            return;
+        String temp = strs[left];
+        int i = left, j = right;
+        while(i < j) {
+            while((temp + strs[j]).compareTo(strs[j] + temp) >= 0 && i < j)   //这里等于号
+                j--;
+            while((temp + strs[i]).compareTo(strs[i] + temp) <= 0 && i < j)
+                i++;
+            if(i < j)     // 这里别忘了判断
+                swap(strs, i, j);
+        }
+        swap(strs, left, i);
+        qSort(strs, left, i - 1);
+        qSort(strs, i + 1, right);
+    }
+    public void swap(String[] strs, int p1, int p2) {
+        String temp = strs[p1];
+        strs[p1] = strs[p2];
+        strs[p2] = temp;
+    }
+}
+
+
