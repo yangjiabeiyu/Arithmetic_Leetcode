@@ -44,4 +44,25 @@ class Solution {
     }
 }
 
+/*
+解法二：记录每个字符首次出现的位置，如果两个对应相等，那么就ok
+执行用时：14 ms, 在所有 Java 提交中击败了38.01% 的用户
+内存消耗：38.8 MB, 在所有 Java 提交中击败了61.25% 的用户
+*/
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()) return false;
+        Map<Character, Integer> map1 = new HashMap<>();
+        Map<Character, Integer> map2 = new HashMap<>();
+        for(int i = s.length() - 1; i >= 0; i--) {
+            map1.put(s.charAt(i), i);
+            map2.put(t.charAt(i), i);
+        }
+        for(int i = 0; i < s.length(); i++)
+            if(map1.get(s.charAt(i)) != map2.get(t.charAt(i)))
+                return false;
+        return true;
+    }
+}
+
 
