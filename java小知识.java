@@ -46,6 +46,7 @@ res.add(String.join(" ", path));  // 可以拼接字符串数组或队列
 */
 List<String> res = new ArrayList<>();
 res.add(); // 末尾添加
+res.add(int index, E e); // 在指定位置添加
 res.remove(); // 删除末尾
 res.set(index, value);  // 修改值
 res.size();  // 列表的长度
