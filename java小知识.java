@@ -57,6 +57,8 @@ res.size();  // 列表的长度
 set.contains(i);  // set是否包含i
 set.add(i);           // 添加i
 set.remove(i);   // 删除i
+// new set，传入变量可以是list
+Set<String> set = new HashSet<>(wordDict);  // List<String> wordDict
 
 /*
 8、数组剪切
