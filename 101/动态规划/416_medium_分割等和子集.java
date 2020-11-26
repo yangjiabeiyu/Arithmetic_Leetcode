@@ -19,7 +19,8 @@ https://leetcode-cn.com/problems/partition-equal-subset-sum/
 */
 
 /*
-解法一：动态规划
+解法一：动态规划；我一开始觉得代码是不对的，因为第一列应该先置为true，这样后续的j==nums[i]的时候才会将dp[i][j]置为true，否则可能不是true；
+但通过了测试，后面我才明白，通过测试的原因就是：dp[0][nums[0]] = true，因为若能分为两份，其中一份必然是包含nums[0]的，所以只要它初始化为true，就能一直往后传递，得到true的结果。
 执行用时：31 ms, 在所有 Java 提交中击败了60.16% 的用户
 内存消耗：39.2 MB, 在所有 Java 提交中击败了40.57% 的用户
 */
@@ -50,7 +51,25 @@ class Solution {
 
 /*
 解法二：空间优化，考虑到每次都需要上一轮次且在前面的数据，所以只能逆向更新。
-
+执行用时：19 ms, 在所有 Java 提交中击败了87.02% 的用户
+内存消耗：37.9 MB, 在所有 Java 提交中击败了82.86% 的用户
 */
-
+class Solution {
+    public boolean canPartition(int[] nums) {
+        if(nums.length < 2) return false;
+        int sum = 0, n = nums.length;
+        for(int i = 0; i < n; i++)
+            sum += nums[i];
+        if(sum % 2 == 1) return false;
+        sum /= 2;
+        boolean[] dp = new boolean[sum + 1];
+        dp[0] = true;
+        for(int i = 0; i < n; i++) {
+            for(int j = sum; j >= nums[i]; j--)   // 只需要到nums[i]
+                    dp[j] |= dp[j - nums[i]];
+            if(dp[sum]) return true;
+        }
+        return dp[sum];   
+    }
+}
 
