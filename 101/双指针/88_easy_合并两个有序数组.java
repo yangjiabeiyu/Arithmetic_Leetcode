@@ -31,3 +31,18 @@ class Solution {
     }
 }
 
+/*
+解法二：这道题可以更为简化，一个是使用m和n代替i和j，另外一个，如果是nums2先到了0，就不用再对nums1赋值了，因为本身就在，所以只需要考虑nums1先遍历完的情形。
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：38.7 MB, 在所有 Java 提交中击败了54.88% 的用户
+*/
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int k = m-- + n-- - 1;
+        while(m >= 0 && n >= 0)
+            nums1[k--] = nums1[m] <= nums2[n] ? nums2[n--] : nums1[m--];
+        while(n >= 0)
+            nums1[k--] = nums2[n--];
+    }
+}
+
