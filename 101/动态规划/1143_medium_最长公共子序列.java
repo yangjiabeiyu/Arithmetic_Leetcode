@@ -22,7 +22,6 @@ class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
         int m = text1.length(), n = text2.length();
         int[][] dp = new int[m + 1][n + 1];  // 可以理解为从空字符串到完整的字符串
-        int start1 = 0, start2 = 0;
         for(int i = 1; i <= m; i++)
             for(int j = 1; j <= n; j++) {
                 if(text1.charAt(i - 1) == text2.charAt(j - 1))  // 如果相等，就直接i-1和j-1
