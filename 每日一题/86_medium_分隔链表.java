@@ -10,7 +10,7 @@ https://leetcode-cn.com/problems/partition-list/
 */
 
 /*
-解法：先找到待插入点，然后遍历逐个插入即可
+解法：原地修改，先找到待插入点，然后遍历逐个插入即可
 执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
 内存消耗：38 MB, 在所有 Java 提交中击败了31.15% 的用户
 */
@@ -47,6 +47,31 @@ class Solution {
             else cur = cur.next;  // 如果不比x小，就直接往下走
         }
         return dummyHead.next;  // 注意这里不要返回head，因为head可能会到链表中间
+    }
+}
+
+/*
+解法二：直接整两个链表，一个是小于的，一个是不小于的，然后拼接
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：37.7 MB, 在所有 Java 提交中击败了78.06% 的用户
+*/
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode dummyHead1 = new ListNode(-1), dummyHead2 = new ListNode(-1), p = head, q1 = dummyHead1, q2 = dummyHead2;
+        while(p != null) {
+            if(p.val < x) {
+                q1.next = p;
+                q1 = p;
+            }
+            else {
+                q2.next = p;
+                q2 = p;
+            }
+            p = p.next;
+        }
+        q1.next = dummyHead2.next;
+        q2.next = null;
+        return dummyHead1.next;
     }
 }
 
