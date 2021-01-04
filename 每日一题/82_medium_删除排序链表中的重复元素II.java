@@ -43,3 +43,22 @@ class Solution {
     }
 }
 
+/*
+递归
+执行用时：0 ms, 在所有 Java 提交中击败了100.00% 的用户
+内存消耗：37.8 MB, 在所有 Java 提交中击败了75.44% 的用户
+*/
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head == null || head.next == null) return head;
+        if(head.val == head.next.val) {
+            ListNode p = head.next.next;
+            while(p != null && p.val == head.val)
+                p = p.next;
+            return deleteDuplicates(p);
+        }
+        head.next = deleteDuplicates(head.next);
+        return head;
+    }
+}
+
