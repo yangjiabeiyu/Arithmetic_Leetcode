@@ -1,0 +1,48 @@
+/*
+367. 有效的完全平方数
+给定一个正整数 num，编写一个函数，如果 num 是一个完全平方数，则返回 True，否则返回 False。
+https://leetcode-cn.com/problems/valid-perfect-square/
+说明：不要使用任何内置的库函数，如  sqrt。
+示例 1：
+输入：16
+输出：True
+*/
+
+/*
+解法一：遍历
+执行用时：1 ms, 在所有 Java 提交中击败了17.94%的用户
+内存消耗：35.2 MB, 在所有 Java 提交中击败了57.63%的用户
+*/
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        if(num == 1) return true;
+        int n = num / 2;
+        for(int i = 1; i <= n; i++) {
+            if(i * i == num)
+                return true;
+            if(num / i <= i)
+                break;
+        }
+        return false;
+    }
+}
+
+/*
+解法二：二分
+执行用时：0 ms, 在所有 Java 提交中击败了100.00%的用户
+内存消耗：35.2 MB, 在所有 Java 提交中击败了48.41%的用户
+*/
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        if(num == 1) return true;
+        int left = 2, right = num / 2;
+        while(left <= right) {
+            int mid = left + (right - left) / 2;
+            if(mid * mid == num) return true;
+            else if(num / mid <= mid) right = mid - 1;
+            else left = mid + 1;
+        }
+        return false;
+    }
+}
+
