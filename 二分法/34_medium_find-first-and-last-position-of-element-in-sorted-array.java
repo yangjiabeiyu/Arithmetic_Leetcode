@@ -22,7 +22,7 @@ class Solution {
         return new int[]{left, right - 1};
     }
     public int searchFirstPos(int[] nums, int target) {
-        int left = 0, right = nums.length;   // 这里right需要是nums.length，而不能是num.length-1。如果是后者，那么恰好target是最后一个，那么target+1也是最后一个，这就无法区分是否存在了
+        int left = 0, right = nums.length;   // 这里right需要是nums.length，而不能是nums.length-1。如果是后者，那么恰好target是最后一个，那么target+1也是最后一个，这就无法区分是否存在了
         while(left < right) {
             int mid = (left + right) / 2;
             if(nums[mid] < target)
